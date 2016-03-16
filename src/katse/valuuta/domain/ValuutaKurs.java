@@ -8,10 +8,10 @@ import javax.persistence.Entity;
  *
  */
 @Entity
-public class ValuutaKursid extends BaseEntity{
+public class ValuutaKurs extends BaseEntity{
 	
 
-	private Valuuta valuuta;	
+	private String valuuta;	
 	private String allikas;		
 	private String date; 		// antud ülesande lihtsuse huvides Stringina, 
 								// kuna kasutatakse ainult kuupäevi
@@ -19,10 +19,10 @@ public class ValuutaKursid extends BaseEntity{
 	private Double kurs;
 	
 	
-	public Valuuta getValuuta() {
+	public String getValuuta() {
 		return valuuta;
 	}
-	public void setValuuta(Valuuta valuuta) {
+	public void setValuuta(String valuuta) {
 		this.valuuta = valuuta;
 	}
 	public String getAllikas() {

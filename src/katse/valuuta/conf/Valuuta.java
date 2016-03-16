@@ -1,15 +1,12 @@
-package katse.valuuta.domain;
-
-import javax.persistence.Entity;
+package katse.valuuta.conf;
 
 /**
  * Klass valuutadega seotud põhiandmete hoidmiseks
- * (Hea valuutade nimekirja esitamiseks)
  * @author AR
  *
  */
-@Entity
-public class Valuuta extends BaseEntity{
+
+public class Valuuta{
 	
 	private String nimetus;
 	private String nimetusPikk;
