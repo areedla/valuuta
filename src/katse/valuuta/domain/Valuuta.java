@@ -13,6 +13,17 @@ public class Valuuta extends BaseEntity{
 	
 	private String nimetus;
 	private String nimetusPikk;
+	
+	public Valuuta(){
+		
+	}
+	
+	public Valuuta(String nimetus, String nimetusPikk){
+		
+		this.nimetus = nimetus;
+		this.nimetusPikk = nimetusPikk;
+	}
+	
 	public String getNimetus() {
 		return nimetus;
 	}

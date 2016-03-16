@@ -1,5 +1,6 @@
 package katse.valuuta.controller;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -29,7 +30,9 @@ public class ValuutaController {
 		
 		String startMessage = "Uus valuutakalkulaator (PROOV).";
 		
-		List<Valuuta> valuutad = valuutaService.getAllValuutad();
+		List<Valuuta> valuutad =  new ArrayList<Valuuta>();//valuutaService.getAllValuutad();
+		valuutad.add(new Valuuta("EEK", "Kroon"));
+		valuutad.add(new Valuuta("LTL", "Litt"));
 		
 		Tulemus tulemus = new Tulemus();
 		if(cal != null){
@@ -38,7 +41,7 @@ public class ValuutaController {
 		
 		ModelAndView mv = new ModelAndView("valuuta");
 		mv.addObject("startMessage", startMessage);
-		mv.addObject("valuuta", valuutad);
+		mv.addObject("valuutad", valuutad);
 		mv.addObject("msg", tulemus.msg);
 		mv.addObject("error", tulemus.error);
 		mv.addObject("summa", summa);

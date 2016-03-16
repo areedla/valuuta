@@ -1,5 +1,5 @@
 <%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
-<%@ taglib prefix="form" uri="http://www.springframework.org/tags/form" %>
+<%--<%@ taglib prefix="form" uri="http://www.springframework.org/tags/form" %> --%>
 <%@page session="false"%>
 <html>
 	<jsp:include page="header.jsp"/>
@@ -7,19 +7,63 @@
 
 		<h2>${startMessage}</h2>
 		
-		<div class="container_12">
+		<div class="container_12 center textCenter">
 		
 			<!-- SISESTUSVORM -->
-			<div  class="grid_12 center textCenter" id="valuutaVorm">
-			<form:form>
-			</form:form>
-			TODO: form
+			<div  class="grid_8 center textCenter lightYellow" id="valuutaVorm">
+				
+				<form id='valuutaForm' action='/valuuta/' method='GET'>
+					<input name="cal" type="hidden" value="ok"/>
+					
+					<table>
+						<tr>
+							<td class="textRight"><label>Summa</label></td>							
+							<td><input name="summa" type="text" value="<c:out value="${summa}"/>"></td>
+						</tr>
+						<tr>
+							<td class="textRight"><label>Lähtevaluuta</label></td>
+							<td>
+								<input name="fromP" type="hidden" value="<c:out value="${from}"/>"/>
+								<select name="from">
+								  <c:forEach var="valuuta" items="${valuutad}">
+								    <option value="<c:out value='${valuuta.nimetus}'/>" id="<c:out value='${valuuta.nimetus}'/>">
+								      <c:out value="${valuuta.nimetusPikk}" />
+								    </option>
+								  </c:forEach>
+								</select>
+							</td>
+						</tr>
+						<tr>
+							<td class="textRight"><label>Sihtvaluuta</label></td>
+							<td>
+								<input name="toP" type="hidden" value="<c:out value="${to}"/>"/>
+								<select name="to">
+								  <c:forEach var="valuuta" items="${valuutad}">
+								    <option value="<c:out value='${valuuta.nimetus}'/>" id="<c:out value='${valuuta.nimetus}'/>">
+								      <c:out value="${valuuta.nimetusPikk}" />
+								    </option>
+								  </c:forEach>
+								</select>
+							</td>
+						</tr>
+						<tr>
+							<td class="textRight"><label>Kursi kuupäev</label></td>
+							<td><input name="kp" type="text" value="<c:out value="${kp}"/>"></td>
+						</tr>
+						<tr>
+							<td class="textRight"><button id="clearButton" class="nupp" style="float:right;">Puhasta</button></td>
+							<td><input type='submit' class="nupp" style="float:left;" id='valuutaButton' name='valuutaButton' value='Kalkuleeri' style='float:right'/></td>
+						</tr>
+					
+					</table>
+				</form>
+				
 
 			</div>
 			
 			
 			<!-- TEATED -->
-			<div class="grid_12">		
+			<div class="grid_8 lightYellow">		
 				<!-- Siia kogume kõik teated kokku. Nt. veateated. -->
 				<c:if test="${!msg.equals('')}"> 
 					<div style="color:blue; font-weight:bold;">
@@ -35,7 +79,7 @@
 			
 			
 			<!-- TULEMUSTE TABEL -->
-			<div class="grid_12 textCenter height300 textCenter center">
+			<div name="tulemused" class="grid_8 textCenter center lightYellow">
 				
 				<c:if test="${tulemused != null and tulemused.size() > 0}"> 
 					<div>

@@ -5,7 +5,7 @@ body {
   font-size: 12px;
   height: auto;
   padding-bottom: 20px;
-  text-shadow: 2px 2px #ff0000;
+  /*text-shadow: 1px 1px #669999;*/
 }
 
 h2 {
@@ -13,14 +13,39 @@ h2 {
   text-align: center;
 }
 
-.height300 {
-	min-height: 300px;
+.container_12 {
+	border-radius: 10px;
+	background: #FFFFE0;
+	align: center;
+	text-align: center;
+	
 }
-
-.grid_6, .grid_8, .grid_10, .grid_12 {
+.grid_8 {
 	
 	border-radius: 10px;
-	background: #fff;
+	background: #FFFFE0;
+}
+
+table {
+	background-color: #FFFFE0;
+	border-collapse: collapse;
+	border: 3px solid #FFFFE0;
+	color: #000000;
+	width: 100%;
+}
+
+td {
+	text-align: left;
+	border-collapse: collapse;
+	border: 3px solid #FFFFE0;
+}
+
+.blue {
+	background: #99b3ff;
+}
+
+.lightYellow {
+	background: #FFFFE0;
 }
 
 .center {
@@ -30,37 +55,7 @@ h2 {
 .textCenter {
 	text-align: center;
 }
-
-.paddingTop5{
-	padding-top: 5px;
-}
-
-.paddingTop10{
-	padding-top: 10px;
-}
-
-.paddingTop20{
-	padding-top: 20px;
-}
-
-.paddingTop90{
-	padding-top: 90px;
-}
-
-table {
-	background-color: #FFFFE0;
-	border-collapse: collapse;
-	border: 3px solid #FFFFFF;
-	color: #000000;
-	width: 100%;
-}
-td {
-	text-align: left;
-	border-collapse: collapse;
-	border: 3px solid #FFFFFF;
-}
-
-.lightYellow {
-	backgroud: #FFFFE0;
-}
+.textRight {
+	text-align: right;
+} 
 
