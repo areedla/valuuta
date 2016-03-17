@@ -119,39 +119,45 @@ public class ValuutaService {
 		 * 3. leitud tulemustest teeb vastavad teisendused
 		 * 4. tagastab listi tulemustest
 		 */
-		
-		// Iga kp peab olema from ja to paar allika kohta ehk listid peavad olema võrdse suurusega
-		// See on siin mõtte koht, et kuidas baasi päringuid teha.. hetkel jääb nii
-		List<ValuutaKurs> valuutaKursidFrom = valuutaKursDao.getAllByValuutaAndDate(tulemus.from, tulemus.kp);
-		List<ValuutaKurs> valuutaKursidTo = valuutaKursDao.getAllByValuutaAndDate(tulemus.to, tulemus.kp);
-		
-		if(valuutaKursidFrom.isEmpty()){
-			// ei leidnud midagi, siis pärime allikatest
-			uptadeValuutadByData(tulemus.kp);
-			// ja teeme otsast peale, kui juba pole teinud.. muidu antud kood läheb ilusti tsükklisse:D 
-			//												   ja ei hakka seda isegi testima hetkel
-			if(uuesti) return null;
-			return kalkuleeri(tulemus, true);
-		}
-		
-		tulemus.tulemused = new ArrayList<TulemusRida>();
-		double summa = Double.parseDouble(tulemus.summa);
-		for(ValuutaKurs from: valuutaKursidFrom){
-			// otsime paarilise
-			ValuutaKurs to = null;
-			for(ValuutaKurs sobib: valuutaKursidTo){
-				if(from.equals(sobib)){
-					to = sobib;
-					break;
-				}
-			}
-			TulemusRida tulemusRida = new TulemusRida();
-			double kurs = ValuutaUtil.toBaseValue(from.getKurs(), to.getKurs());
-			tulemusRida.summa = Double.toString(kurs * summa);
-			tulemusRida.kurs = Double.toString(kurs);
-			tulemusRida.allikas = from.getAllikas();
+		try{
+			// Iga kp peab olema from ja to paar allika kohta ehk listid peavad olema võrdse suurusega
+			// See on siin mõtte koht, et kuidas baasi päringuid teha.. hetkel jääb nii
+			List<ValuutaKurs> valuutaKursidFrom = valuutaKursDao.getAllByValuutaAndDate(tulemus.from, tulemus.kp);
+			List<ValuutaKurs> valuutaKursidTo = valuutaKursDao.getAllByValuutaAndDate(tulemus.to, tulemus.kp);
 			
-			tulemus.tulemused.add(tulemusRida);	
+			if(valuutaKursidFrom.isEmpty()){
+				// ei leidnud midagi, siis pärime allikatest
+				uptadeValuutadByData(tulemus.kp);
+				// ja teeme otsast peale, kui juba pole teinud.. muidu antud kood läheb ilusti tsükklisse:D 
+				//												   ja ei hakka seda isegi testima hetkel
+				if(uuesti) return null;
+				return kalkuleeri(tulemus, true);
+			}
+			
+			tulemus.tulemused = new ArrayList<TulemusRida>();
+			double summa = Double.parseDouble(tulemus.summa);
+			for(ValuutaKurs from: valuutaKursidFrom){
+				// otsime paarilise
+				ValuutaKurs to = null;
+				for(ValuutaKurs sobib: valuutaKursidTo){
+					if(from.equals(sobib)){
+						to = sobib;
+						break;
+					}
+				}
+				TulemusRida tulemusRida = new TulemusRida();
+				double kurs = ValuutaUtil.toBaseValue(from.getKurs(), to.getKurs());
+				tulemusRida.summa = Double.toString(kurs * summa);
+				tulemusRida.kurs = Double.toString(kurs);
+				tulemusRida.allikas = from.getAllikas();
+				
+				tulemus.tulemused.add(tulemusRida);	
+			}
+			// TODO: õnnestus järelikult võib kasutajale midagi öelda, kui vaja a'la tulemus.msg = .. parima panga valik nt
+		}catch(Exception e){
+			// siin püüame kõik vead kinni ning otsutame mida teha
+			tulemus.error = "Viga! See süsteem vajab veel arendamist! Või juhtus müstiline viga ning proovi teine kord uuesti.";
+			e.printStackTrace();
 		}
 		
 		
