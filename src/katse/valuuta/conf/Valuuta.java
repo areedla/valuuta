@@ -38,7 +38,7 @@ public class Valuuta{
 	public String toString() {
 		return nimetusPikk;
 	}
-	
+	 
 	
 
 }

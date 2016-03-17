@@ -7,7 +7,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 /**
- * Konfiguratsiooni lugemiseks
+ * Util konfiguratsiooni lugemiseks
  * @author AR
  *
  */
@@ -17,7 +17,7 @@ public class Conf {
 	 * Kõik konfi failis lisatud allikad
 	 * @return Allika' list
 	 */
-	public List<Allikas> getAllikad(){
+	static public List<Allikas> getAllikad(){
 		
 		List<Allikas> allikad = new ArrayList<Allikas>();
 		

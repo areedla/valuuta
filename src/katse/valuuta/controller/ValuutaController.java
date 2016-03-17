@@ -1,6 +1,5 @@
 package katse.valuuta.controller;
 
-import java.util.ArrayList;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -9,7 +8,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
 
-import katse.valuuta.domain.Valuuta;
+import katse.valuuta.conf.Valuuta;
 import katse.valuuta.service.Tulemus;
 import katse.valuuta.service.ValuutaService;
 
@@ -30,9 +29,8 @@ public class ValuutaController {
 		
 		String startMessage = "Uus valuutakalkulaator (PROOV).";
 		
-		List<Valuuta> valuutad =  new ArrayList<Valuuta>();//valuutaService.getAllValuutad();
-		valuutad.add(new Valuuta("EEK", "Kroon"));
-		valuutad.add(new Valuuta("LTL", "Litt"));
+		List<Valuuta> valuutad = valuutaService.getAllValuutad();
+		// TODO: paneme sessiooni ja uuesti ei küsi
 		
 		Tulemus tulemus = new Tulemus();
 		if(cal != null){

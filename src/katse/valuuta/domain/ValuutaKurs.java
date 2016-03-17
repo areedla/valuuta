@@ -11,12 +11,27 @@ import javax.persistence.Entity;
 public class ValuutaKurs extends BaseEntity{
 	
 
-	private String valuuta;	
+	private String valuuta;
+	private String nimetus;
 	private String allikas;		
 	private String date; 		// antud ülesande lihtsuse huvides Stringina, 
 								// kuna kasutatakse ainult kuupäevi
-								// kujul aaaa-MM-dd, NB! baasi indeksid
+								// kujul aaaa-MM-dd, NB! baasi indeksid..
 	private Double kurs;
+	
+	public ValuutaKurs(){
+		
+	}
+	
+	public ValuutaKurs(String valuuta, String nimetus, 
+			String allikas, String date, double kurs){
+		
+		this.valuuta = valuuta;
+		this.nimetus = nimetus;
+		this.allikas = allikas;
+		this.date = date;
+		this.kurs = kurs;
+	}
 	
 	
 	public String getValuuta() {
@@ -43,7 +58,11 @@ public class ValuutaKurs extends BaseEntity{
 	public void setKurs(Double kurs) {
 		this.kurs = kurs;
 	}
-	
-	
+	public String getNimetus() {
+		return nimetus;
+	}
+	public void setNimetus(String nimetus) {
+		this.nimetus = nimetus;
+	}
 
 }
