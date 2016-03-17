@@ -34,7 +34,7 @@ public class ValuutaController {
 		
 		Tulemus tulemus = new Tulemus();
 		if(cal != null){
-			tulemus = valuutaService.kalkuleeri(new Tulemus(summa, from, to, kp));
+			tulemus = valuutaService.kalkuleeri(new Tulemus(summa, from, to, kp), false);
 		}
 		
 		ModelAndView mv = new ModelAndView("valuuta");

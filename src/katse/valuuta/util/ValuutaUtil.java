@@ -13,7 +13,7 @@ public class ValuutaUtil {
 	 * @param val
 	 * @return
 	 */
-	static double toBaseValue(double base, double val){
+	public static double toBaseValue(double base, double val){
 
 		return val/base;	
 	}

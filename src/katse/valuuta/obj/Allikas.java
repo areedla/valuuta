@@ -2,9 +2,9 @@ package katse.valuuta.obj;
 
 /**
  * Lihtne objekt allika andmete hoidmiseks 
- * baas
- * nimetus
- * url
+ * 	baas
+ * 	nimetus
+ * 	url
  * @author AR
  *
  */
