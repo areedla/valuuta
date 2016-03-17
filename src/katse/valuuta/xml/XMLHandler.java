@@ -24,7 +24,7 @@ public abstract class XMLHandler extends DefaultHandler{
 
 	public List<ValuutaKurs> getValuutaKursid() {
 		// lihtne ja ajutine ehk igavene lahendus omaraha lismiseks:D
-		// TODO: if(lisati midagi siis alles), aga testimiseks väljas..
+		// TODO: if(lisati midagi siis alles..), aga testimiseks väljas..
 		if(allikas.getBaas().equals("EEK")) valuutaKursid.add(new ValuutaKurs("EEK", 
 				"Eesti kroon", "EEK", "Eesti Pank", kp, 1.0));
 		if(allikas.getBaas().equals("LTL")) valuutaKursid.add(new ValuutaKurs("LTL", 
