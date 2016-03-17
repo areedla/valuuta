@@ -1,5 +1,4 @@
 body {
-	
   background: #fff;
   color: #333;
   font-size: 12px;
@@ -30,6 +29,7 @@ td {
 	text-align: left;
 	border-collapse: collapse;
 	border: 3px solid #FFFFE0;
+	min-whith: 100px;
 }
 
 hr {
@@ -55,5 +55,24 @@ hr {
 	margin-left: 12px;
 	margin-top: 12px;
 	margin-bottom: 12px;
+}
+
+.msgContainer{
+	margin-left: 10px;
+	margin-top: -5px;
+	margin-bottom: 5px;
+	
+	padding-left: 10px;
+	padding-top: 10px;
+	padding-bottom: 10px;
+}
+
+.tulemusContainer{
+	min-hight: 300px;
+}
+
+label.error {
+	color: red;
+	padding-left: 10px;
 }
 

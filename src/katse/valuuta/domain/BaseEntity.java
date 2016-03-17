@@ -1,9 +1,5 @@
 package katse.valuuta.domain;
 
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
-
 /**
  * Kõikide objektide baasklass
  * 
@@ -12,8 +8,6 @@ import javax.persistence.Id;
  */
 public abstract class BaseEntity {
 	
-	@Id
-	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long id;
 	private Boolean aktiivne = true;
 	// jne. nt. auditväljad

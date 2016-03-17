@@ -1,8 +1,10 @@
 package katse.valuuta.xml;
 
-import java.io.FileInputStream;
 import java.io.InputStream;
+import java.net.URL;
 import java.util.List;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 import javax.xml.parsers.SAXParser;
 import javax.xml.parsers.SAXParserFactory;
@@ -12,7 +14,7 @@ import katse.valuuta.obj.Allikas;
 
 public class ValuutaXMLConnector {
 	
-	//private static Logger LOG = LoggerFactory.getLogger(ValuutaXMLConnector.class);
+	private Logger LOG = LoggerFactory.getLogger(ValuutaXMLConnector.class);
 	
 	private Allikas allikas;
 	
@@ -31,7 +33,7 @@ public class ValuutaXMLConnector {
 		this.allikas = allikas;
 	}
 	
-	public List<ValuutaKurs> getKursid(String date){
+	public List<ValuutaKurs> getKursid(String kp){
 		
 		XMLHandler xmlHandler = null;
 		
@@ -47,7 +49,7 @@ public class ValuutaXMLConnector {
 				break;
 		}
 		if(xmlHandler == null){
-			//LOG.info("Ei toeta veel sellist allikat: " + allikas.getBaas());
+			LOG.info("Ei toeta veel sellist allikat: " + allikas.getBaas());
 			return null;
 		}
 		
@@ -56,9 +58,10 @@ public class ValuutaXMLConnector {
 			SAXParserFactory parserFactor = SAXParserFactory.newInstance();
 			SAXParser parser = parserFactor.newSAXParser();
 			xmlHandler.setAllikas(allikas);
-			xmlHandler.setDate(date);
-			
-			InputStream is = new FileInputStream("C:/ework/valuuta/report.xml");
+			xmlHandler.setKp(kp);
+			String url = allikas.getUrl() + kp;
+			LOG.info("Pärime kursid allikat: " + url);
+			InputStream is = new URL(url).openStream();			
 			parser.parse(is, xmlHandler); //TODO: url'ilt
 			
 		}catch (Exception e) {

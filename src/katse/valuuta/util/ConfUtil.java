@@ -3,6 +3,9 @@ package katse.valuuta.util;
 import java.io.BufferedReader;
 import java.io.FileReader;
 import java.io.IOException;
+import java.io.InputStream;
+import java.io.InputStreamReader;
+import java.io.Reader;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -19,15 +22,15 @@ public class ConfUtil {
 	 * Kõik konfi failis lisatud allikad
 	 * @return Allika' list
 	 */
-	static public List<Allikas> getAllikad(){
+	public List<Allikas> getAllikad(){
 		
 		List<Allikas> allikad = new ArrayList<Allikas>();
 		
 		BufferedReader br = null;
 		String rida = "";
-		
 		try {
-			br = new BufferedReader(new FileReader("C:/ework/valuuta/valuuta_allikad.csv"));
+			Reader reader = new InputStreamReader(getClass().getResourceAsStream("/valuuta_allikad.csv"));
+			br = new BufferedReader(reader);
 			
 			while ((rida = br.readLine()) != null) {
 				

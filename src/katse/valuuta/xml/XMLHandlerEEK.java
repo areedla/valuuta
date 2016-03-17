@@ -24,7 +24,8 @@ public class XMLHandlerEEK extends XMLHandler{
 	      		setProperties();
 	      		valuutaKurs.setValuuta(attributes.getValue("name"));
 	      		valuutaKurs.setNimetus(attributes.getValue("text"));
-	      		valuutaKurs.setKurs(Double.parseDouble(attributes.getValue("rate").replace(",", ".")));
+	      		valuutaKurs.setKurs(Double.parseDouble(attributes.getValue("rate")
+	      				.replace(",", ".").replace(" ", "").trim()));
 	      		attributes.getValue("id");
 	      		break;
 	    }

@@ -18,13 +18,14 @@ public abstract class XMLHandler extends DefaultHandler{
 	
 	protected Allikas allikas = null;
 	
-	protected String date = null;
+	protected String kp = null;
 	
 	protected List<ValuutaKurs> valuutaKursid = new ArrayList<ValuutaKurs>();
 
 	public List<ValuutaKurs> getValuutaKursid() {
 		// lihtne ja ajutine ehk igavene lahendus eesti krooni lismiseks
-		if(allikas.getBaas().equals("EEK")) valuutaKursid.add(new ValuutaKurs("EEK", "Eesti kroon", "EEK", date, 1.0));
+		if(allikas.getBaas().equals("EEK")) valuutaKursid.add(new ValuutaKurs("EEK", 
+				"Eesti kroon", "EEK", "Eesti Pank", kp, 1.0));
 		return valuutaKursid;
 	}
 
@@ -40,17 +41,18 @@ public abstract class XMLHandler extends DefaultHandler{
 		this.allikas = allikas;
 	}	
 	
-	public String getDate() {
-		return date;
+	public String getKp() {
+		return kp;
 	}
 
-	public void setDate(String date) {
-		this.date = date;
+	public void setKp(String kp) {
+		this.kp = kp;
 	}
 
 	protected void setProperties(){
 		valuutaKurs.setAllikas(allikas.getBaas());
-		valuutaKurs.setDate(date);
+		valuutaKurs.setAllikasNimetus(allikas.getNimetus());
+		valuutaKurs.setKp(kp);
 	}
 
 

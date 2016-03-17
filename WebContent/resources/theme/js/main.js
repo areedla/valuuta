@@ -8,7 +8,7 @@ jQuery(document ).ready(function() {
     
     // kuupäeva datepicker
     jQuery("[name='kp']").datepicker({
-		  dateFormat: "dd.mm.yy",
+		  dateFormat: "yy-mm-dd",
 		  showButtonPanel: true
 	});
     
@@ -16,8 +16,9 @@ jQuery(document ).ready(function() {
     jQuery("#clearButton").click(function(e){
     	  e.preventDefault();
 		  jQuery("[name='summa']").val("");
-		  jQuery("[name='kp']").val("");
+		  jQuery("[name='kp']").val("2010-12-30");
 		  jQuery("[name='tulemused']").text("");
+		  jQuery("#msg").text("");
 		  
 		  selectValitudFrom(defaultFrom);;
 		  selectValitudTo(defaultTo);
@@ -35,7 +36,32 @@ jQuery(document ).ready(function() {
     }
     selectValitudFrom(valitudFrom);
     selectValitudTo(valitudTo);
-      
+    
+    
+    // formi valideerimine
+    jQuery("#valuutaForm").submit(function(e) {
+        	e.preventDefault();
+    }).validate({
+        rules: {
+            summa: {
+                required: true,
+                number: true,
+                regex: /^\d*\.?\d*$/,
+            },
+            kp: {
+                required: true,
+                date: true,
+                minlength: 6,
+            },
+            from: "requered",
+            to: "requered"
+        },
+        messages: {
+        },
+        submitHandler: function(form) {
+        	form.submit();
+        }
+    });
 	 
 });
 

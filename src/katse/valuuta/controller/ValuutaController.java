@@ -37,6 +37,8 @@ public class ValuutaController {
 			tulemus = valuutaService.kalkuleeri(new Tulemus(summa, from, to, kp), false);
 		}
 		
+		if(kp == null || kp.equals("")) kp = "2010-12-30";
+		
 		ModelAndView mv = new ModelAndView("valuuta");
 		mv.addObject("startMessage", startMessage);
 		mv.addObject("valuutad", valuutad);

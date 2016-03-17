@@ -1,22 +1,20 @@
 package katse.valuuta.domain;
 
-import javax.persistence.Entity;
-
 /**
  * Ajaloolised kursitabelite andmed
- * @author kasutaja5y
+ * @author AR
  *
  */
-@Entity
 public class ValuutaKurs extends BaseEntity{
 	
-
 	private String valuuta;
 	private String nimetus;
-	private String allikas;		
-	private String date; 		// antud ülesande lihtsuse huvides Stringina, 
+	private String allikas;
+	private String allikasNimetus;
+	private String kp; 		// antud ülesande lihtsuse huvides Stringina, 
 								// kuna kasutatakse ainult kuupäevi
 								// kujul aaaa-MM-dd, NB! baasi indeksid..
+								// NB! date ei ole hea nimetus väljale
 	private Double kurs;
 	
 	public ValuutaKurs(){
@@ -24,12 +22,13 @@ public class ValuutaKurs extends BaseEntity{
 	}
 	
 	public ValuutaKurs(String valuuta, String nimetus, 
-			String allikas, String date, double kurs){
+			String allikas, String allikasNimetus, String kp, double kurs){
 		
 		this.valuuta = valuuta;
 		this.nimetus = nimetus;
 		this.allikas = allikas;
-		this.date = date;
+		this.allikasNimetus = allikasNimetus;
+		this.kp = kp;
 		this.kurs = kurs;
 	}
 	
@@ -46,11 +45,11 @@ public class ValuutaKurs extends BaseEntity{
 	public void setAllikas(String allikas) {
 		this.allikas = allikas;
 	}
-	public String getDate() {
-		return date;
+	public String getKp() {
+		return kp;
 	}
-	public void setDate(String date) {
-		this.date = date;
+	public void setKp(String kp) {
+		this.kp = kp;
 	}
 	public Double getKurs() {
 		return kurs;
@@ -63,6 +62,14 @@ public class ValuutaKurs extends BaseEntity{
 	}
 	public void setNimetus(String nimetus) {
 		this.nimetus = nimetus;
+	}
+
+	public String getAllikasNimetus() {
+		return allikasNimetus;
+	}
+
+	public void setAllikasNimetus(String allikasNimetus) {
+		this.allikasNimetus = allikasNimetus;
 	}
 
 }

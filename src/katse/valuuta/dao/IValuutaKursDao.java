@@ -6,7 +6,7 @@ import katse.valuuta.domain.ValuutaKurs;
 
 public interface IValuutaKursDao {
 	
-	public List<ValuutaKurs> getAllByValuutaAndDate(String valuuta, String date);
+	public List<ValuutaKurs> getAllByValuutaAndDate(String valuuta, String kp);
 	public void insert(ValuutaKurs valuutaKurs);
 
 }

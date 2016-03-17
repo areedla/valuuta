@@ -27,7 +27,7 @@
 								<select name="from">
 								  <c:forEach var="valuuta" items="${valuutad}">
 								    <option value="<c:out value='${valuuta.nimetus}'/>" id="<c:out value='${valuuta.nimetus}'/>">
-								      <c:out value="${valuuta.nimetusPikk}" />
+								      <c:out value="${valuuta.nimetus}" />
 								    </option>
 								  </c:forEach>
 								</select>
@@ -40,7 +40,7 @@
 								<select name="to">
 								  <c:forEach var="valuuta" items="${valuutad}">
 								    <option value="<c:out value='${valuuta.nimetus}'/>" id="<c:out value='${valuuta.nimetus}'/>">
-								      <c:out value="${valuuta.nimetusPikk}" />
+								      <c:out value="${valuuta.nimetus}" />
 								    </option>
 								  </c:forEach>
 								</select>
@@ -52,7 +52,7 @@
 						</tr>
 						<tr>
 							<td class="textRight"><button id="clearButton" class="nupp" style="float:right;">Puhasta</button></td>
-							<td><input type='submit' class="nupp" style="float:left;" value='Kalkuleeri' style='float:right'/></td>
+							<td><input type="submit" class="nupp" style="float:left;" value='Kalkuleeri' style='float:right'/></td>
 						</tr>
 					
 					</table>
@@ -63,7 +63,7 @@
 			
 			
 			<!-- TEATED -->
-			<div class="grid_8 lightYellow">		
+			<div id="msg" class="grid_8 msgContainer lightYellow">		
 				<!-- Siia kogume kõik teated kokku. Nt. veateated. -->
 				<c:if test="${!msg.equals('')}"> 
 					<div style="color:blue; font-weight:bold;">
@@ -79,7 +79,7 @@
 			
 			
 			<!-- TULEMUSTE TABEL -->
-			<div name="tulemused" class="grid_8 textCenter center lightYellow">
+			<div name="tulemused" class="grid_8 lightYellow">
 				
 				<c:if test="${tulemused != null and tulemused.size() > 0}"> 
 					<div>
@@ -87,16 +87,16 @@
 			       			<thead>
 			         			<tr>
 			          				<th> Allikas</th>
-			          				<th> Kurs </th>
-			          				<th> Summa </th>
+			          				<th> <c:out value="${tulemusKursCaption}"/> </th>
+			          				<th> <c:out value="${tulemusSummaCaption}"/> </th>
 			         			</tr>
 			        		</thead>
 			        		<tbody>
-						        <c:forEach var="tulemus" items="${tulemused}">
+						        <c:forEach var="t" items="${tulemused}">
 							        <tr>
-							          	<td><c:out value="${tulemus.allikas}"/></td>
-							          	<td><c:out value="${tulemus.kurs}"/></td>
-							          	<td><c:out value="${tulemus.summa}"/></td>
+							          	<td><c:out value="${t.allikas}"/></td>
+							          	<td><c:out value="${t.kurs}"/></td>
+							          	<td><c:out value="${t.summa}"/></td>
 							        </tr>
 						        </c:forEach>
 			       			</tbody>
