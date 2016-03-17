@@ -6,10 +6,12 @@ import java.util.List;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
+import javax.xml.bind.ValidationException;
 import javax.xml.parsers.SAXParser;
 import javax.xml.parsers.SAXParserFactory;
 
 import katse.valuuta.domain.ValuutaKurs;
+import katse.valuuta.exception.ValuutaXMLHandlerException;
 import katse.valuuta.obj.Allikas;
 
 public class ValuutaXMLConnector {
@@ -33,7 +35,7 @@ public class ValuutaXMLConnector {
 		this.allikas = allikas;
 	}
 	
-	public List<ValuutaKurs> getKursid(String kp){
+	public List<ValuutaKurs> getKursid(String kp) throws ValuutaXMLHandlerException{
 		
 		XMLHandler xmlHandler = null;
 		
@@ -65,7 +67,8 @@ public class ValuutaXMLConnector {
 			parser.parse(is, xmlHandler); //TODO: url'ilt
 			
 		}catch (Exception e) {
-			e.printStackTrace();
+			//e.printStackTrace(); see hiljem kui loggimine levelite kaupa paigas 
+			throw new ValuutaXMLHandlerException("Ei saanud XMLiga hakkama! " + e.getMessage(), xmlHandler.getClass().getName());
 		}
 		
 		return xmlHandler.getValuutaKursid();

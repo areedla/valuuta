@@ -9,6 +9,7 @@ import org.springframework.stereotype.Component;
 
 import katse.valuuta.dao.ValuutaKursDao;
 import katse.valuuta.domain.ValuutaKurs;
+import katse.valuuta.exception.ValuutaXMLHandlerException;
 import katse.valuuta.obj.Allikas;
 import katse.valuuta.obj.Tulemus;
 import katse.valuuta.obj.TulemusRida;
@@ -50,17 +51,22 @@ public class ValuutaService {
 		for(Allikas allikas: allikad){		
 			ValuutaXMLConnector valuutaXmlCon = new ValuutaXMLConnector(allikas);
 			String kp = "2010-12-30"; //fix kuna enam uusi pole Eesti Pangas..DateUtil.formatDate(new Date(), "yyyy-MM-dd");
-			List<ValuutaKurs> kursiTabel = valuutaXmlCon.getKursid(kp);
-			for(ValuutaKurs kurs: kursiTabel){
-				boolean olemas = false;
-				for(Valuuta v: valuutad){
-					if(kurs.getValuuta().equals(v.getNimetus())){
-						olemas = true;
-						break;
+			List<ValuutaKurs> kursiTabel = null;
+			try {
+				kursiTabel = valuutaXmlCon.getKursid(kp);
+				for(ValuutaKurs kurs: kursiTabel){
+					boolean olemas = false;
+					for(Valuuta v: valuutad){
+						if(kurs.getValuuta().equals(v.getNimetus())){
+							olemas = true;
+							break;
+						}
 					}
+					if(!olemas)
+						valuutad.add(new Valuuta(kurs.getValuuta(), kurs.getNimetus()));
 				}
-				if(!olemas)
-					valuutad.add(new Valuuta(kurs.getValuuta(), kurs.getNimetus()));
+			} catch (ValuutaXMLHandlerException e) {
+				e.printStackTrace();
 			}
 		}
 		
@@ -90,11 +96,16 @@ public class ValuutaService {
 			
 			ValuutaXMLConnector valuutaXmlCon = new ValuutaXMLConnector(allikas);
 			//String kp = DateUtil.formatDate(DateUtil.getEile(), "yyyy-MM-dd");
-			List<ValuutaKurs> kursiTabel = valuutaXmlCon.getKursid(kp);
+			List<ValuutaKurs> kursiTabel;
+			try {
+				kursiTabel = valuutaXmlCon.getKursid(kp);
+				for(ValuutaKurs valuutaKurs: kursiTabel){
+					valuutaKursDao.insert(valuutaKurs);
+				}
+			} catch (ValuutaXMLHandlerException e) {
+				e.printStackTrace();
+			}			
 			
-			for(ValuutaKurs valuutaKurs: kursiTabel){
-				valuutaKursDao.insert(valuutaKurs);
-			}
 		}
 	}
 	
@@ -106,7 +117,12 @@ public class ValuutaService {
 	public List<ValuutaKurs> getKursiTabel(Allikas allikas, String kp){
 		
 		ValuutaXMLConnector valuutaXmlCon = new ValuutaXMLConnector(allikas);
-		List<ValuutaKurs> kursiTabel = valuutaXmlCon.getKursid(kp);
+		List<ValuutaKurs> kursiTabel = null;
+		try {
+			kursiTabel = valuutaXmlCon.getKursid(kp);
+		} catch (ValuutaXMLHandlerException e) {
+			e.printStackTrace();
+		}
 		
 		return kursiTabel;
 	}
