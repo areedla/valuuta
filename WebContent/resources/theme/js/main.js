@@ -45,8 +45,8 @@ valuuta.cal = {
 		jQuery("#tulemused").text("");
 		jQuery("#msg").text("");
 	  
-		selectValitudFrom(defaultFrom);;
-		selectValitudTo(defaultTo);
+		valuuta.cal.selectValitudFrom(valuuta.cal.defaultFrom);;
+		valuuta.cal.selectValitudTo(valuuta.cal.defaultTo);
 	},
 	
 	
@@ -68,12 +68,12 @@ valuuta.cal = {
 	
 	
 	selectValitudFrom: function(valitudFrom){
-		jQuery("[name='from'] #" + from).prop("selected", true);
+		jQuery("[name='from'] #" + valitudFrom).prop("selected", true);
 	},
 	
 	
 	selectValitudTo: function(valitudTo){
-		jQuery("[name='to'] #" + to).prop("selected", true);
+		jQuery("[name='to'] #" + valitudTo).prop("selected", true);
 	},
 	
 	

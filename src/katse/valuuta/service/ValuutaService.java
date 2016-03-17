@@ -4,6 +4,8 @@ import java.text.DecimalFormat;
 import java.util.ArrayList;
 import java.util.List;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
@@ -23,6 +25,8 @@ import katse.valuuta.xml.ValuutaXMLConnector;
  */
 @Component
 public class ValuutaService {
+	
+	private static Logger LOG = LoggerFactory.getLogger(ValuutaService.class);
 	
 	@Autowired
 	ValuutaKursDao valuutaKursDao;
@@ -66,7 +70,8 @@ public class ValuutaService {
 						valuutad.add(new Valuuta(kurs.getValuuta(), kurs.getNimetus()));
 				}
 			} catch (ValuutaXMLHandlerException e) {
-				e.printStackTrace();
+				LOG.error(e.getHandler() + " " + e.getMsg());
+				//e.printStackTrace();
 			}
 		}
 		
@@ -103,7 +108,8 @@ public class ValuutaService {
 					valuutaKursDao.insert(valuutaKurs);
 				}
 			} catch (ValuutaXMLHandlerException e) {
-				e.printStackTrace();
+				LOG.error(e.getHandler() + " " + e.getMsg());
+				//e.printStackTrace();
 			}			
 			
 		}
@@ -121,7 +127,8 @@ public class ValuutaService {
 		try {
 			kursiTabel = valuutaXmlCon.getKursid(kp);
 		} catch (ValuutaXMLHandlerException e) {
-			e.printStackTrace();
+			LOG.error(e.getHandler() + " " + e.getMsg());
+			//e.printStackTrace();
 		}
 		
 		return kursiTabel;
@@ -150,7 +157,7 @@ public class ValuutaService {
 			
 			if(valuutaKursidFrom == null || valuutaKursidFrom.isEmpty()){
 				if(uuesti){
-					tulemus.msg = "Ei leidnud anutud kuupäeva (" + tulemus.kp + ") kohta vahetuskursse!";
+					tulemus.msg = "Ei leidnud antud kuupäeva (" + tulemus.kp + ") kohta vahetuskursse! Võibolla teenused ei vasta?";
 					return tulemus;
 				}
 				// ei leidnud midagi, siis pärime allikatest
