@@ -1,4 +1,4 @@
-package katse.valuuta.conf;
+package katse.valuuta.obj;
 
 /**
  * Klass valuutadega seotud põhiandmete hoidmiseks
@@ -32,6 +32,11 @@ public class Valuuta{
 	}
 	public void setNimetusPikk(String nimetusPikk) {
 		this.nimetusPikk = nimetusPikk;
+	}
+	
+	@Override
+	public boolean equals(Object o) {
+		return nimetus == ((Valuuta) o).getNimetus();
 	}
 	
 	@Override

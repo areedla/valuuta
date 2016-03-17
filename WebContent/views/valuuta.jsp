@@ -4,13 +4,13 @@
 <html>
 	<jsp:include page="header.jsp"/>
 	<body>
-
+		
 		<h2>${startMessage}</h2>
 		
-		<div class="container_12 center textCenter">
+		<div class="container_12">
 		
 			<!-- SISESTUSVORM -->
-			<div  class="grid_8 center textCenter lightYellow" id="valuutaVorm">
+			<div  class="grid_8 formContainer" id="valuutaVorm">
 				
 				<form id='valuutaForm' action='/valuuta/' method='GET'>
 					<input name="cal" type="hidden" value="ok"/>
@@ -52,7 +52,7 @@
 						</tr>
 						<tr>
 							<td class="textRight"><button id="clearButton" class="nupp" style="float:right;">Puhasta</button></td>
-							<td><input type='submit' class="nupp" style="float:left;" id='valuutaButton' name='valuutaButton' value='Kalkuleeri' style='float:right'/></td>
+							<td><input type='submit' class="nupp" style="float:left;" value='Kalkuleeri' style='float:right'/></td>
 						</tr>
 					
 					</table>
@@ -95,8 +95,8 @@
 						        <c:forEach var="tulemus" items="${tulemused}">
 							        <tr>
 							          	<td><c:out value="${tulemus.allikas}"/></td>
-							          	<td><c:out value="${tulemus}"/></td>
-							          	<td><c:out value="${tulemus}"/></td>
+							          	<td><c:out value="${tulemus.kurs}"/></td>
+							          	<td><c:out value="${tulemus.summa}"/></td>
 							        </tr>
 						        </c:forEach>
 			       			</tbody>

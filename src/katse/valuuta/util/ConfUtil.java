@@ -1,4 +1,4 @@
-package katse.valuuta.conf;
+package katse.valuuta.util;
 
 import java.io.BufferedReader;
 import java.io.FileReader;
@@ -6,12 +6,14 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 
+import katse.valuuta.obj.Allikas;
+
 /**
  * Util konfiguratsiooni lugemiseks
  * @author AR
  *
  */
-public class Conf {
+public class ConfUtil {
 	
 	/**
 	 * Kõik konfi failis lisatud allikad
@@ -25,8 +27,7 @@ public class Conf {
 		String rida = "";
 		
 		try {
-			
-			br = new BufferedReader(new FileReader("valuuta_allikad.csv"));
+			br = new BufferedReader(new FileReader("C:/ework/valuuta/valuuta_allikad.csv"));
 			
 			while ((rida = br.readLine()) != null) {
 				

@@ -1,4 +1,4 @@
-package katse.valuuta.service;
+package katse.valuuta.obj;
 
 import java.util.List;
 

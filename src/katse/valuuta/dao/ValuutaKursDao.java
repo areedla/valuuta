@@ -6,6 +6,6 @@ package katse.valuuta.dao;
  * @author AR
  *
  */
-public class ValuutaKursDao {
+public class ValuutaKursDao extends AbstractDao{
 
 }

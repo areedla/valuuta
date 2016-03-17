@@ -1,12 +1,14 @@
 package katse.valuuta.xml;
 
+import java.io.FileInputStream;
+import java.io.InputStream;
 import java.util.List;
 
 import javax.xml.parsers.SAXParser;
 import javax.xml.parsers.SAXParserFactory;
 
-import katse.valuuta.conf.Allikas;
 import katse.valuuta.domain.ValuutaKurs;
+import katse.valuuta.obj.Allikas;
 
 public class ValuutaXMLConnector {
 	
@@ -39,8 +41,10 @@ public class ValuutaXMLConnector {
 		switch(allikas.getBaas()){
 			case "EEK":
 				xmlHandler = new XMLHandlerEEK();
+				break;
 			case "LTL":
-				xmlHandler = new XMLHandlerLTL();	
+				xmlHandler = new XMLHandlerLTL();
+				break;
 		}
 		if(xmlHandler == null){
 			//LOG.info("Ei toeta veel sellist allikat: " + allikas.getBaas());
@@ -53,7 +57,9 @@ public class ValuutaXMLConnector {
 			SAXParser parser = parserFactor.newSAXParser();
 			xmlHandler.setAllikas(allikas);
 			xmlHandler.setDate(date);
-			parser.parse(ClassLoader.getSystemResourceAsStream("xml.xml"), xmlHandler); //TODO: url'ilt
+			
+			InputStream is = new FileInputStream("C:/ework/valuuta/report.xml");
+			parser.parse(is, xmlHandler); //TODO: url'ilt
 			
 		}catch (Exception e) {
 			e.printStackTrace();

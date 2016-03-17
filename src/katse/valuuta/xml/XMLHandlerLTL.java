@@ -51,11 +51,11 @@ public class XMLHandlerLTL extends XMLHandler{
 	     		valuutaKurs.setValuuta(content);
 	     		break;
 	     	case "rate":
-	     		valuutaKurs.setKurs(Double.parseDouble(content));
+	     		valuutaKurs.setKurs(Double.parseDouble(content.replace(",", ".")));
 	     		break;
 	     	case "quantity":
 	     		// hetkel eeldab et xml'is on tagid õiges järjekorras
-	     		valuutaKurs.setKurs(valuutaKurs.getKurs()/Double.parseDouble(content));
+	     		valuutaKurs.setKurs(valuutaKurs.getKurs()/Double.parseDouble(content.replace(",", ".")));
 	     		break;
 	   }
 	}

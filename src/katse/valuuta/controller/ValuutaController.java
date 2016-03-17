@@ -8,8 +8,8 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
 
-import katse.valuuta.conf.Valuuta;
-import katse.valuuta.service.Tulemus;
+import katse.valuuta.obj.Tulemus;
+import katse.valuuta.obj.Valuuta;
 import katse.valuuta.service.ValuutaService;
 
 @Controller
@@ -27,7 +27,7 @@ public class ValuutaController {
 			@RequestParam(value = "kp", required = false) String kp,
 			@RequestParam(value = "cal", required = false) String cal) {
 		
-		String startMessage = "Uus valuutakalkulaator (PROOV).";
+		String startMessage = "Uus valuutakalkulaator";
 		
 		List<Valuuta> valuutad = valuutaService.getAllValuutad();
 		// TODO: paneme sessiooni ja uuesti ei küsi

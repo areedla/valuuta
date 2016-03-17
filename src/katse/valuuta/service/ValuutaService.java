@@ -1,16 +1,16 @@
 package katse.valuuta.service;
 
 import java.util.ArrayList;
-import java.util.Collections;
 import java.util.Date;
 import java.util.List;
 
 import org.springframework.stereotype.Component;
 
-import katse.valuuta.conf.Allikas;
-import katse.valuuta.conf.Conf;
-import katse.valuuta.conf.Valuuta;
 import katse.valuuta.domain.ValuutaKurs;
+import katse.valuuta.obj.Allikas;
+import katse.valuuta.obj.Tulemus;
+import katse.valuuta.obj.Valuuta;
+import katse.valuuta.util.ConfUtil;
 import katse.valuuta.util.DateUtil;
 import katse.valuuta.xml.ValuutaXMLConnector;
 
@@ -35,17 +35,17 @@ public class ValuutaService {
 		
 		List<Valuuta> valuutad = new ArrayList<Valuuta>();
 		
-		List<Allikas> allikad = Conf.getAllikad();
+		List<Allikas> allikad = ConfUtil.getAllikad();
 		
 		for(Allikas allikas: allikad){
-			if(allikas.getBaas().equals("EEK")){
+			//if(allikas.getBaas().equals("EEK")){
 				ValuutaXMLConnector valuutaXmlCon = new ValuutaXMLConnector(allikas);
 				String date = DateUtil.formatDate(new Date(), "yyyy-mm-dd");
 				List<ValuutaKurs> kursiTabel = valuutaXmlCon.getKursid(date);
 				for(ValuutaKurs kurs: kursiTabel){
 					valuutad.add(new Valuuta(kurs.getValuuta(), kurs.getNimetus()));
 				}
-			}
+			//}
 		}
 		
 		//TODO: sorteerimis kriteerium Valuuta obj juurde

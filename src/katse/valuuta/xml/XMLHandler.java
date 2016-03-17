@@ -6,8 +6,8 @@ import java.util.List;
 import org.xml.sax.SAXException;
 import org.xml.sax.helpers.DefaultHandler;
 
-import katse.valuuta.conf.Allikas;
 import katse.valuuta.domain.ValuutaKurs;
+import katse.valuuta.obj.Allikas;
 
 /**
  * Erievatest allikatest tulevate XML'ide töötlemise baasklass
@@ -24,7 +24,7 @@ public abstract class XMLHandler extends DefaultHandler{
 
 	public List<ValuutaKurs> getValuutaKursid() {
 		// lihtne ja ajutine ehk igavene lahendus eesti krooni lismiseks
-		if(allikas.getBaas().equals("EEK")) valuutaKursid.add(new ValuutaKurs());
+		if(allikas.getBaas().equals("EEK")) valuutaKursid.add(new ValuutaKurs("EEK", "Eesti kroon", "EEK", date, 1.0));
 		return valuutaKursid;
 	}
 
