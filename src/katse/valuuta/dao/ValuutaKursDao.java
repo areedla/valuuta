@@ -21,7 +21,7 @@ public class ValuutaKursDao extends AbstractDao implements IValuutaKursDao{
 	public List<ValuutaKurs> getAllByValuutaAndDate(String valuuta, String kp) {
 		
 		List<ValuutaKurs> kursid = getTemplate().query(
-		        "select valuuta, nimetus, allikas, kp, kurs from valuuta_kurs where valuuta = ? and kp = ?",
+		        "select valuuta, nimetus, allikas, allikas_nimetus, kp, kurs from valuuta_kurs where valuuta = ? and kp = ?",
 		        new Object[]{valuuta, kp},
 		        new RowMapper<ValuutaKurs>() {
 		            public ValuutaKurs mapRow(ResultSet rs, int rowNum) throws SQLException {
@@ -29,6 +29,7 @@ public class ValuutaKursDao extends AbstractDao implements IValuutaKursDao{
 		            	kurs.setValuuta(rs.getString("valuuta"));
 		            	kurs.setNimetus(rs.getString("nimetus"));
 		            	kurs.setAllikas(rs.getString("allikas"));
+		            	kurs.setAllikasNimetus(rs.getString("allikas_nimetus"));
 		            	kurs.setKp(rs.getString("kp"));
 		            	kurs.setKurs(rs.getDouble("kurs"));
 		                return kurs;
@@ -42,10 +43,11 @@ public class ValuutaKursDao extends AbstractDao implements IValuutaKursDao{
 	public void insert(ValuutaKurs valuutaKurs) {
 		
 		getTemplate().update(
-		        "insert into valuuta_kurs (valuuta, nimetus, allikas, kp, kurs) values (?, ?, ?, ?, ?)",
+		        "insert into valuuta_kurs (valuuta, nimetus, allikas, allikas_nimetus, kp, kurs) values (?, ?, ?, ?, ?, ?)",
 			        valuutaKurs.getValuuta(), 
 			        valuutaKurs.getNimetus(), 
-			        valuutaKurs.getAllikas(), 
+			        valuutaKurs.getAllikas(),
+			        valuutaKurs.getAllikasNimetus(),
 			        valuutaKurs.getKp(), 
 			        valuutaKurs.getKurs());
 	}

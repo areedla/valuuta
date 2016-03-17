@@ -8,11 +8,12 @@
 		<h2>${startMessage}</h2>
 		
 		<div class="container_12">
+		<div class="grid_12">
 		
 			<!-- SISESTUSVORM -->
-			<div  class="grid_8 formContainer" id="valuutaVorm">
+			<div class="grid_8 formContainer" id="valuutaVorm">
 				
-				<form id='valuutaForm' action='/valuuta/' method='GET'>
+				<form id='valuutaForm' action='/valuuta/cal' method='GET'>
 					<input name="cal" type="hidden" value="ok"/>
 					
 					<table>
@@ -63,15 +64,15 @@
 			
 			
 			<!-- TEATED -->
-			<div id="msg" class="grid_8 msgContainer lightYellow">		
+			<div id="msg" class="grid_8 lightYellow">		
 				<!-- Siia kogume kõik teated kokku. Nt. veateated. -->
 				<c:if test="${!msg.equals('')}"> 
-					<div style="color:blue; font-weight:bold;">
+					<div class="msgContainer">
 						<c:out value="${msg}"/>
 					</div>
 				</c:if>
 				<c:if test="${!error.equals('')}"> 
-					<div style="color:red; font-weight:bold;">
+					<div class="errorContainer">
 						<c:out value="${error}"/>
 					</div>
 				</c:if>
@@ -79,11 +80,11 @@
 			
 			
 			<!-- TULEMUSTE TABEL -->
-			<div name="tulemused" class="grid_8 lightYellow">
+			<div id="tulemused" class="grid_8 tulemusedContainer lightYellow">
 				
 				<c:if test="${tulemused != null and tulemused.size() > 0}"> 
 					<div>
-						<table>
+						<table style="">
 			       			<thead>
 			         			<tr>
 			          				<th> Allikas</th>
@@ -107,7 +108,8 @@
 		    </div>
 		    
 		</div>
-		
+		</div>
+		<br/>
 		<jsp:include page="footer.jsp"/>
 	</body>
 </html>

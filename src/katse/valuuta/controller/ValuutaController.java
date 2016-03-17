@@ -4,8 +4,10 @@ import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.SessionAttributes;
 import org.springframework.web.servlet.ModelAndView;
 
 import katse.valuuta.obj.Tulemus;
@@ -13,14 +15,22 @@ import katse.valuuta.obj.Valuuta;
 import katse.valuuta.service.ValuutaService;
 
 @Controller
+@SessionAttributes(value = "valuutad", types = {Valuuta.class})
 public class ValuutaController {
 	
 	@Autowired
 	ValuutaService valuutaService;
 	
+	@ModelAttribute("valuutad")
+    public List<Valuuta> getValuutad() {
+		List<Valuuta> valuutad = valuutaService.getAllValuutad();
+		return valuutad;
+	}
+	
 	// Selles rakenduses kasutame ainult ühte kontrolleri meetodit
-	@RequestMapping({"/"})
+	@RequestMapping({"/cal"})
 	public ModelAndView valuuta(
+			@ModelAttribute("valuutad") List<Valuuta> valuutad,
 			@RequestParam(value = "summa", required = false) String summa,
 			@RequestParam(value = "from", required = false) String from,
 			@RequestParam(value = "to", required = false) String to,
@@ -28,9 +38,6 @@ public class ValuutaController {
 			@RequestParam(value = "cal", required = false) String cal) {
 		
 		String startMessage = "Uus valuutakalkulaator";
-		
-		List<Valuuta> valuutad = valuutaService.getAllValuutad();
-		// TODO: paneme sessiooni ja uuesti ei küsi
 		
 		Tulemus tulemus = new Tulemus();
 		if(cal != null){

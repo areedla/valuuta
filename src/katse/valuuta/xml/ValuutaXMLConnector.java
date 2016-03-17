@@ -60,7 +60,7 @@ public class ValuutaXMLConnector {
 			xmlHandler.setAllikas(allikas);
 			xmlHandler.setKp(kp);
 			String url = allikas.getUrl() + kp;
-			LOG.info("Pärime kursid allikat: " + url);
+			LOG.info("Pärime kursid allikast: " + url);
 			InputStream is = new URL(url).openStream();			
 			parser.parse(is, xmlHandler); //TODO: url'ilt
 			

@@ -17,7 +17,7 @@ jQuery(document ).ready(function() {
     	  e.preventDefault();
 		  jQuery("[name='summa']").val("");
 		  jQuery("[name='kp']").val("2010-12-30");
-		  jQuery("[name='tulemused']").text("");
+		  jQuery("#tulemused").text("");
 		  jQuery("#msg").text("");
 		  
 		  selectValitudFrom(defaultFrom);;
@@ -45,18 +45,15 @@ jQuery(document ).ready(function() {
         rules: {
             summa: {
                 required: true,
-                number: true,
-                regex: /^\d*\.?\d*$/,
+                number: true
             },
             kp: {
                 required: true,
                 date: true,
                 minlength: 6,
             },
-            from: "requered",
-            to: "requered"
-        },
-        messages: {
+            from: required=true,
+            to: required=true,
         },
         submitHandler: function(form) {
         	form.submit();

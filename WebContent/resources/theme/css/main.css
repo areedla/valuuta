@@ -13,7 +13,17 @@ h2 {
 	background: #f0f5f5;
 }
 .grid_8 {
-	
+	margin-top: 10px;
+	margin-bottom: 10px;
+	border-radius: 10px;
+	background: #FFFFE0;
+}
+.grid_10 {
+	float:none;
+}
+.grid_12 {
+	margin-top: 10px;
+	margin-bottom: 10px;
 	border-radius: 10px;
 	background: #FFFFE0;
 }
@@ -29,7 +39,6 @@ td {
 	text-align: left;
 	border-collapse: collapse;
 	border: 3px solid #FFFFE0;
-	min-whith: 100px;
 }
 
 hr {
@@ -44,6 +53,9 @@ hr {
 	background: #FFFFE0;
 }
 
+.center {
+	align: center;
+}
 .textCenter {
 	text-align: center;
 }
@@ -52,9 +64,42 @@ hr {
 } 
 
 .formContainer{
+	margin-top:5px;
+	position:relative;
+	float:none;
 	margin-left: 12px;
 	margin-top: 12px;
 	margin-bottom: 12px;
+}
+
+.tulemusedContainer{
+	margin-top:10px;
+	margin-bottom:10px;
+	position:relative;
+	float:none;
+	min-higth: 300px;
+}
+
+.tulemusedContainer td{
+	min-width: 150px;
+	padding-left: 5px;
+}
+
+.tulemusedContainer th{
+	background: #99b3ff;
+	min-width: 150px;
+	padding-left: 5px;
+}
+
+.tulemusedContainer table{
+	border: 3px solid #FFFFE0;
+	text-align: left;
+	width:95%;
+}
+
+label.error {
+	color: red;
+	padding-left: 10px;
 }
 
 .msgContainer{
@@ -65,14 +110,21 @@ hr {
 	padding-left: 10px;
 	padding-top: 10px;
 	padding-bottom: 10px;
+	
+	color:blue; 
+	font-weight:bold;
 }
 
-.tulemusContainer{
-	min-hight: 300px;
-}
-
-label.error {
-	color: red;
+.errorContainer{
+	margin-left: 10px;
+	margin-top: -5px;
+	margin-bottom: 5px;
+	
 	padding-left: 10px;
+	padding-top: 10px;
+	padding-bottom: 10px;
+	
+	color:red; 
+	font-weight:bold;
 }
 

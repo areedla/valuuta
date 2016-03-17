@@ -1,5 +1,6 @@
 package katse.valuuta.service;
 
+import java.text.DecimalFormat;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -45,15 +46,21 @@ public class ValuutaService {
 		
 		// TODO: ikka kõikidest tabelitest ja kõik kirjutada ümmber sümbolite peale
 		// optimeerimiseks TODO: sisestada kohe baasi andmed!!! kui juba pole 
-		// (hmm baasis peaks mõned uniqu constaindid ka olema?, et ei kirjutaks dopelt andmeid kp kohta, muidu see rakendus..)
-		for(Allikas allikas: allikad){
-			if(allikas.getBaas().equals("EEK")){
-				ValuutaXMLConnector valuutaXmlCon = new ValuutaXMLConnector(allikas);
-				String kp = "2010-12-30"; //fix kuna enam uusi pole..DateUtil.formatDate(new Date(), "yyyy-MM-dd");
-				List<ValuutaKurs> kursiTabel = valuutaXmlCon.getKursid(kp);
-				for(ValuutaKurs kurs: kursiTabel){
-					valuutad.add(new Valuuta(kurs.getValuuta(), kurs.getNimetus()));
+		// (hmm baasis peaks mõned uniqu constaindid ka olema?, et ei kirjutaks topelt andmeid kp kohta, muidu see rakendus..)
+		for(Allikas allikas: allikad){		
+			ValuutaXMLConnector valuutaXmlCon = new ValuutaXMLConnector(allikas);
+			String kp = "2010-12-30"; //fix kuna enam uusi pole Eesti Pangas..DateUtil.formatDate(new Date(), "yyyy-MM-dd");
+			List<ValuutaKurs> kursiTabel = valuutaXmlCon.getKursid(kp);
+			for(ValuutaKurs kurs: kursiTabel){
+				boolean olemas = false;
+				for(Valuuta v: valuutad){
+					if(kurs.getValuuta().equals(v.getNimetus())){
+						olemas = true;
+						break;
+					}
 				}
+				if(!olemas)
+					valuutad.add(new Valuuta(kurs.getValuuta(), kurs.getNimetus()));
 			}
 		}
 		
@@ -151,20 +158,25 @@ public class ValuutaService {
 				if(to != null && from != null){
 					TulemusRida tulemusRida = new TulemusRida();
 					double kurs = ValuutaUtil.toBaseValue(from.getKurs(), to.getKurs());
-					tulemusRida.summa = Double.toString(kurs * summa);
-					tulemusRida.kurs = Double.toString(kurs);
+					double kokku = kurs * summa;
+					DecimalFormat decKurs = new DecimalFormat("#.0000");
+					DecimalFormat decSumma = new DecimalFormat("#.00");
+					tulemusRida.summa = decSumma.format(kokku);
+					tulemusRida.kurs = decKurs.format(kurs);
 					tulemusRida.allikas = from.getAllikasNimetus();
 					
 					tulemus.tulemused.add(tulemusRida);	
 				}
 			}
-			// TODO: õnnestus järelikult võib kasutajale midagi öelda, kui vaja a'la tulemus.msg = .. parima panga valik nt
+			// TODO: õnnestus, järelikult võib kasutajale midagi öelda, kui vaja a'la tulemus.msg = .. parima panga valik nt
 		}catch(Exception e){
 			// siin püüame kõik vead kinni ning otsutame mida teha
 			tulemus.error = "Viga! See süsteem vajab veel arendamist! Või juhtus müstiline viga ning proovi teine kord uuesti.";
 			e.printStackTrace();
 		}
 		
+		tulemus.tulemusKursCaption = "Kurss\n" + tulemus.getFrom() + " -> " + tulemus.getTo();
+		tulemus.tulemusSummaCaption = "Teisendatud summa (" + tulemus.summa + " " + tulemus.getFrom() + ") " + tulemus.getTo() + "'i";
 		
 		return tulemus;
 	}
