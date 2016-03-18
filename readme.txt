@@ -1,10 +1,15 @@
+Projekt on Github'is: https://github.com/areedla/valuuta.git
+Seal on ainult master haru.
+
+Rakenduse võimalik URL: http://localhost:8080/valuuta/cal
+
 Tegemist on Maveni projektiga. Arendatud Eclipsis.
 
 Koodi Eclipsi saamiseks importida olemasoleva Maven projektina.
 Ise kasutasin Java 1.8'at ja Tomcat 8'at.
 Raamistikuna kasutasin Spring 4'ja ning confi tegin XML'is (uuemad Springid soodustavad ka annotatsioonidega konfi - kunagi korra tegin).
 
-Hibernatet ei kasutanud, kuna lihte andmemudel. Kasutasin JdbcTemplet'it ning baasi lisatakse üks tabel sql skriptiga. Kasutab H2 mälus asuvat baasi, et ei tekitaks palju kõrvalisi faile.
+Hibernatet ei kasutanud, kuna lihte andmemudel (Hibernate persistence, entityManagerid ja transaktsioonihaldus jäid ära kõik). Kasutasin JdbcTemplet'it ning baasi lisatakse üks tabel sql skriptiga. Kasutab H2 mälus asuvat baasi, et ei tekitaks palju kõrvalisi faile.
 
 Kursside andmed salvestatakse baasi ning ei minda uuesti pärima (baas on algselt seadistatud küll mälus). Indekseid ja constrainte ei lisanud (antud rakendus ei ela kaua).
 
@@ -17,4 +22,6 @@ Tegin meelega "käsitööd" ning sisendandmete kontroll jäi kasutajaliidese poo
 XML parsimisel kasutatud SAX-parserit (eventitie põhist). Õiges rakenduses peaks tegema xsd pealt klassid jne.. xsd alusel saaks siis ka xml'i valideerida.
 
 Teste ei kirjutanud kuna polnud skoobis. Alustanud oleks servis klassi unit testidega. Veatöötlust ja logimist lisatud minimaalselt. Kood on eesti ja inglise segakeeles ning kommentaarid on vabas vormis.
+
+Jätsin meelega mõned vead sisse (osade valuutade vahe on 10* erinevates pankades?, logis on viga seoses sorteerimisega.. serialiseerimise.. jne).. hiljem debugimiseks. Kuna pidasin õigeks lõpetada ja ..
 

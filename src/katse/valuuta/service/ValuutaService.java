@@ -2,6 +2,7 @@ package katse.valuuta.service;
 
 import java.text.DecimalFormat;
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 
 import org.slf4j.Logger;
@@ -75,8 +76,7 @@ public class ValuutaService {
 			}
 		}
 		
-		//TODO: sorteerimis kriteerium Valuuta obj juurde
-		//Collections.sort(valuutad);
+		Collections.sort(valuutad);
 		
 		return valuutad;
 	}
@@ -157,7 +157,7 @@ public class ValuutaService {
 			
 			if(valuutaKursidFrom == null || valuutaKursidFrom.isEmpty()){
 				if(uuesti){
-					tulemus.msg = "Ei leidnud antud kuupäeva (" + tulemus.kp + ") kohta vahetuskursse! Võibolla teenused ei vasta?";
+					tulemus.msg = "Ei leidnud antud kuupäeva (" + tulemus.kp + ") kohta vahetuskursse! Võib-olla teenused ei vasta?!";
 					return tulemus;
 				}
 				// ei leidnud midagi, siis pärime allikatest
@@ -182,8 +182,8 @@ public class ValuutaService {
 					TulemusRida tulemusRida = new TulemusRida();
 					double kurs = ValuutaUtil.toBaseValue(from.getKurs(), to.getKurs());
 					double kokku = kurs * summa;
-					DecimalFormat decKurs = new DecimalFormat("#.0000");
-					DecimalFormat decSumma = new DecimalFormat("#.00");
+					DecimalFormat decKurs = new DecimalFormat("0.0000");
+					DecimalFormat decSumma = new DecimalFormat("0.00");
 					tulemusRida.summa = decSumma.format(kokku);
 					tulemusRida.kurs = decKurs.format(kurs);
 					tulemusRida.allikas = from.getAllikasNimetus();

@@ -25,7 +25,7 @@
 							<td class="textRight"><label>Lähtevaluuta</label></td>
 							<td>
 								<input name="fromP" type="hidden" value="<c:out value="${from}"/>"/>
-								<select name="from">
+								<select name="from" class="required">
 								  <c:forEach var="valuuta" items="${valuutad}">
 								    <option value="<c:out value='${valuuta.nimetus}'/>" id="<c:out value='${valuuta.nimetus}'/>">
 								      <c:out value="${valuuta.nimetus}" />
@@ -38,7 +38,7 @@
 							<td class="textRight"><label>Sihtvaluuta</label></td>
 							<td>
 								<input name="toP" type="hidden" value="<c:out value="${to}"/>"/>
-								<select name="to">
+								<select name="to" class="required">
 								  <c:forEach var="valuuta" items="${valuutad}">
 								    <option value="<c:out value='${valuuta.nimetus}'/>" id="<c:out value='${valuuta.nimetus}'/>">
 								      <c:out value="${valuuta.nimetus}" />

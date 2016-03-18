@@ -43,19 +43,27 @@ public class XMLHandlerLTL extends XMLHandler{
 	@Override
 	public void endElement(String uri, String localName, 
 	                         String tag) throws SAXException {
+		
+	   double rate = 0;
+	   double quantity = 0;
 	   switch(tag){
 	     	case "item":
 	     		valuutaKursid.add(valuutaKurs);       
 	     		break;
 	     	case "currency":
+	     		//System.out.println("currency: " + content);
 	     		valuutaKurs.setValuuta(content);
 	     		break;
 	     	case "rate":
-	     		valuutaKurs.setKurs(Double.parseDouble(content.replace(",", ".")));
+	     		//System.out.println("rate: " + content);
+	     		rate = Double.parseDouble(content.replace(",", "."));
+	     		valuutaKurs.setKurs(rate);
+	     		if(quantity != 0) valuutaKurs.setKurs((rate/quantity));
 	     		break;
 	     	case "quantity":
-	     		// hetkel eeldab et xml'is on tagid õiges järjekorras
-	     		valuutaKurs.setKurs(valuutaKurs.getKurs()/Double.parseDouble(content.replace(",", ".")));
+	     		//System.out.println("quantity: " + content);
+	     		quantity = Double.parseDouble(content.replace(",", "."));
+	     		if(rate != 0) valuutaKurs.setKurs((rate/quantity));
 	     		break;
 	   }
 	}

@@ -6,7 +6,10 @@ package katse.valuuta.obj;
  *
  */
 
-public class Valuuta{
+public class Valuuta implements Comparable<Valuuta>{
+	
+	@SuppressWarnings("unused")
+	private static final long serialVersionUID = 2893749823L;
 	
 	private String nimetus;
 	private String nimetusPikk;
@@ -43,7 +46,10 @@ public class Valuuta{
 	public String toString() {
 		return nimetusPikk;
 	}
-	 
 	
+	@Override
+	public int compareTo(Valuuta v) {
+        return this.nimetus.compareTo(v.getNimetus());
+    }
 
 }

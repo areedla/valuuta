@@ -64,11 +64,12 @@ public class ValuutaXMLConnector {
 			String url = allikas.getUrl() + kp;
 			LOG.info("Pärime kursid allikast: " + url);
 			InputStream is = new URL(url).openStream();			
-			parser.parse(is, xmlHandler); //TODO: url'ilt
+			parser.parse(is, xmlHandler);
 			
 		}catch (Exception e) {
-			//e.printStackTrace(); see hiljem kui loggimine levelite kaupa paigas 
+			e.printStackTrace(); //see hiljem kui loggimine levelite kaupa paigas
 			throw new ValuutaXMLHandlerException("Ei saanud XMLiga hakkama! " + e.getMessage(), xmlHandler.getClass().getName());
+			
 		}
 		
 		return xmlHandler.getValuutaKursid();
