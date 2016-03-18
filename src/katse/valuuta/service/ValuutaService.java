@@ -155,6 +155,8 @@ public class ValuutaService {
 			List<ValuutaKurs> valuutaKursidFrom = valuutaKursDao.getAllByValuutaAndDate(tulemus.from, tulemus.kp);
 			List<ValuutaKurs> valuutaKursidTo = valuutaKursDao.getAllByValuutaAndDate(tulemus.to, tulemus.kp);
 			
+			// NB! kui mõne kursi kohta on vähem tulemusi kui allikaid siis selle päeva kursid peaks teoreetiliselt uuesti küsima??? miks
+			
 			if(valuutaKursidFrom == null || valuutaKursidFrom.isEmpty()){
 				if(uuesti){
 					tulemus.msg = "Ei leidnud antud kuupäeva (" + tulemus.kp + ") kohta vahetuskursse! Võib-olla teenused ei vasta?!";

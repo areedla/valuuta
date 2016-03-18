@@ -23,5 +23,5 @@ XML parsimisel kasutatud SAX-parserit (eventitie põhist). Õiges rakenduses pea
 
 Teste ei kirjutanud kuna polnud skoobis. Alustanud oleks servis klassi unit testidega. Veatöötlust ja logimist lisatud minimaalselt. Kood on eesti ja inglise segakeeles ning kommentaarid on vabas vormis.
 
-Jätsin meelega mõned vead sisse (osade valuutade vahe on 10* erinevates pankades?, logis on viga seoses sorteerimisega.. serialiseerimise.. jne).. hiljem debugimiseks. Kuna pidasin õigeks lõpetada ja ..
+Seda võib lõpmatuseni teha. Palju TODO-sid jäi sisse. Jätsin meelega mõned vead sisse (osade valuutade vahe on 10* erinevates pankades?, logis on viga seoses sorteerimisega.. serialiseerimise.. jne).. hiljem debugimiseks. Kuna pidasin õigeks lõpetada ja .. põhiline osa koodist töötab, aga aeg sai otsa:)
 
